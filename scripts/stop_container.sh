@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Get the running container ID
+# Get the running container ID (if any)
 container_id=$(docker ps -q)
 
 # Check if a container is running
