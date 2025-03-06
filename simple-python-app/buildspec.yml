@@ -20,6 +20,14 @@ phases:
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
       - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/simple-python-app:latest" .
       - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/simple-python-app:latest"
+      - cd ..
+      - mkdir -p build_output
+      - cp -r appspec.yml scripts simple-python-app build_output/  # Ensure scripts and app files are copied
   post_build:
     commands:
       - echo "Build is successful!"
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build_output
