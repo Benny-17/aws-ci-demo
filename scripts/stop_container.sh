@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 
-# Stop the running container (if any)
-containerid=$(docker ps -q)
+# Get the running container ID
+container_id=$(docker ps -q)
 
-if [ -n "$containerid" ]; then
-    echo "Stopping container: $containerid"
-    docker rm -f "$containerid"
+# Check if a container is running
+if [ -n "$container_id" ]; then
+    echo "Stopping container: $container_id"
+    docker rm -f "$container_id"
 else
     echo "No running container found."
 fi
